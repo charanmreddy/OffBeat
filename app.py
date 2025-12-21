@@ -19,9 +19,12 @@ def download():
     
     temp_dir = tempfile.mkdtemp()
     
+    cookies_path = os.path.join(os.path.dirname(__file__), 'youtube_cookies.txt')
+    
     ydl_opts = {
         'format': 'bestaudio/best',
         'outtmpl': f'{temp_dir}/%(title)s.%(ext)s',
+        'cookiefile': cookies_path,
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
@@ -40,4 +43,3 @@ def download():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)))
-
