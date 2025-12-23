@@ -19,7 +19,11 @@ def download():
     
     temp_dir = tempfile.mkdtemp()
     
-    cookies_path = os.path.join(os.path.dirname(__file__), 'youtube_cookies.txt')
+    cookies_content = os.environ.get('YOUTUBE_COOKIES', '')
+    cookies_path = os.path.join(temp_dir, 'cookies.txt')
+    
+    with open(cookies_path, 'w') as f:
+        f.write(cookies_content)
     
     ydl_opts = {
         'format': 'bestaudio/best',
